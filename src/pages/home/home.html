@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+        Todos!
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="addItem()">
+        	<ion-icon name="add-circle"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content>
+  <ion-list>
+  
+  	<ion-item-sliding *ngFor="let item of items; let i = index">
+	    <ion-item (click)="viewItem(item)" *ngIf= "!item.isDone" >
+			<ion-icon name="md-bulb"></ion-icon>
+	    	{{ item.title }}
+			<ion-note item-right>
+			    {{ item.created | amTimeAgo}}
+			</ion-note>	    	
+	    </ion-item>
+
+	    <ion-item-options side="left">
+	      <button ion-button color="positive" (click)="markDone(i)">
+	      	<ion-icon name="checkmark"></ion-icon>
+	      </button>
+	    </ion-item-options>
+
+	    <ion-item-options side="right">
+	      <button ion-button color="danger" (click)="removeTodo(i)">
+	      	<ion-icon name="trash"></ion-icon>
+	      </button>
+	    </ion-item-options>
+	</ion-item-sliding>
+
+  </ion-list>
+
+  Completed Items
+
+  <ion-list>
+
+  	<ion-item-sliding *ngFor="let item of items; let i = index">
+	    <ion-item (click)="viewItem(item)" *ngIf = "item.isDone" >
+	    	<ion-icon name="checkmark"></ion-icon> 
+	    	{{ item.title }}
+	    	<ion-note item-right>
+			    {{ item.created | amTimeAgo}}
+			</ion-note>
+	    </ion-item>
+<!-- 
+	    <ion-item-options side="left">
+	      <button ion-button color="positive" (click)="markDone(i)">
+	      	<ion-icon name="checkmark"></ion-icon>
+	      </button>
+	    </ion-item-options> -->
+
+	    <ion-item-options side="right">
+	      <button ion-button color="danger" (click)="removeTodo(i)">
+	      	<ion-icon name="trash"></ion-icon>
+	      </button>
+	    </ion-item-options>
+	</ion-item-sliding>
+
+  </ion-list>  
+</ion-content>
