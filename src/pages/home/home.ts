@@ -11,60 +11,69 @@ import { Data } from '../../providers/data';
 export class HomePage {
  
   public items = [];
-  public completed = [];
   
+  // fetch list of todos on first call  
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
- 
+     
     this.dataService.getData().then((todos) => {
-      console.log(todos);	
       if(todos){
         this.items = JSON.parse(todos); 
       }
     });
  	
   }
- 
-  ionViewDidLoad(){
- 
-  }
- 
+  
+  // Show add todo modal 
   addItem(){
  
     let addModal = this.modalCtrl.create(AddItemPage);
- 
+
     addModal.onDidDismiss((item) => {
- 
-          if(item){
-            this.saveItem(item);
-          }
- 
+     this.dataService.getData().then((todos) => {
+       this.items = JSON.parse(todos);
+     });  
     });
  
     addModal.present();
  
   }
  
+  // save item to todos list
+  // @params item:object => list  
   saveItem(item){
-    this.items.push(item);
-    this.dataService.save(this.items);
+    if(item === null){
+      this.items.push(item);
+      this.dataService.save(this.items);
+    }
   }
- 
+   
+  // Show todo description 
+  // @params item:object => list   
   viewItem(item){
     this.navCtrl.push(ItemDetailPage, {
       item: item
     });
   }
 
-  markDone(index:number){
-  	let thisitem = this.items[index];
-  	thisitem.isDone = true;
-  	this.dataService.save(this.items);
+  // Mark todo as done
+  // @params itemid:number => list index number
+  markDone(itemid:number){
+   	this.items[itemid].isDone = true;
+    this.dataService.save(this.items);
   }  
 
+  // Remove todo
+  // @params index:number => list index number  
   removeTodo(index:number){
     this.items.splice(index, 1);
     this.dataService.save(this.items);
-    //localStorage.setItem("todos", JSON.stringify(this.todoList));  	
+  }
+
+  // Mark todo as undone
+  // @params itemid:number => list index number  
+  markUndone(itemid:number){
+    this.items[itemid].isDone = false;
+    this.dataService.save(this.items);    
   }
  
 }

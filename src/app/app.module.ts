@@ -6,7 +6,7 @@ import { AddItemPage } from '../pages/add-item-page/add-item-page';
 import { ItemDetailPage } from '../pages/item-detail-page/item-detail-page';
 import { Storage } from '@ionic/storage';
 import { Data } from '../providers/data';
-import {MomentModule} from 'angular2-moment';
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
   declarations: [

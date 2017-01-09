@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-        Todos!
+       <ion-icon name="md-done-all"></ion-icon> Ionic2Do
     </ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="addItem()">
@@ -13,56 +13,78 @@
  
 <ion-content>
   <ion-list>
-  
+	<ion-item-divider color="light">
+		Undone
+	</ion-item-divider>
   	<ion-item-sliding *ngFor="let item of items; let i = index">
-	    <ion-item (click)="viewItem(item)" *ngIf= "!item.isDone" >
+	    <button ion-item (click)="viewItem(item)" [hidden]="item.isDone" >
 			<ion-icon name="md-bulb"></ion-icon>
 	    	{{ item.title }}
 			<ion-note item-right>
 			    {{ item.created | amTimeAgo}}
 			</ion-note>	    	
-	    </ion-item>
+	    </button>
 
 	    <ion-item-options side="left">
 	      <button ion-button color="positive" (click)="markDone(i)">
-	      	<ion-icon name="checkmark"></ion-icon>
+	      	<ion-icon name="md-done-all"> Done</ion-icon>
 	      </button>
 	    </ion-item-options>
 
 	    <ion-item-options side="right">
 	      <button ion-button color="danger" (click)="removeTodo(i)">
-	      	<ion-icon name="trash"></ion-icon>
+	      	<ion-icon name="trash"> Remove</ion-icon>
 	      </button>
 	    </ion-item-options>
 	</ion-item-sliding>
 
   </ion-list>
 
-  Completed Items
-
   <ion-list>
-
+	<ion-item-divider color="light">
+		Completed
+	</ion-item-divider>
   	<ion-item-sliding *ngFor="let item of items; let i = index">
-	    <ion-item (click)="viewItem(item)" *ngIf = "item.isDone" >
-	    	<ion-icon name="checkmark"></ion-icon> 
+	    <ion-item (click)="viewItem(item)" [hidden] = "!item.isDone" >
+	    	<ion-icon name="md-done-all"></ion-icon> 
 	    	{{ item.title }}
 	    	<ion-note item-right>
 			    {{ item.created | amTimeAgo}}
 			</ion-note>
 	    </ion-item>
-<!-- 
+
 	    <ion-item-options side="left">
-	      <button ion-button color="positive" (click)="markDone(i)">
-	      	<ion-icon name="checkmark"></ion-icon>
+	      <button ion-button color="positive" (click)="markUndone(i)">
+	      	<ion-icon name="arrow-up"> Undone</ion-icon>
 	      </button>
-	    </ion-item-options> -->
+	    </ion-item-options>
 
 	    <ion-item-options side="right">
 	      <button ion-button color="danger" (click)="removeTodo(i)">
-	      	<ion-icon name="trash"></ion-icon>
+	      	<ion-icon name="trash"> Remove</ion-icon>
 	      </button>
 	    </ion-item-options>
 	</ion-item-sliding>
 
-  </ion-list>  
+  </ion-list> 
+
+
+  <ion-fab right bottom>
+    <button ion-fab color="vibrant"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="addItem()"><ion-icon name="add-circle"></ion-icon></button>
+      <a ion-fab href="market://details?id=com.ionic2do"><ion-icon name="star"></ion-icon></a>
+    </ion-fab-list>
+  </ion-fab>
+
+<!--   <ion-fab right bottom>
+    <button ion-fab color="danger" ><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+	</ion-fab-list>    
+  </ion-fab>  --> 
+
 </ion-content>

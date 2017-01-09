@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "Ionic2Do",
+  "author": "Amit Patil",
+  "homepage": "http://www.amitpatil.me",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -47,5 +47,5 @@
       "locator": "ios"
     }
   ],
-  "description": "ionic2do: An Ionic project"
+  "description": "Ionic2Do: An Ionic project"
 }
